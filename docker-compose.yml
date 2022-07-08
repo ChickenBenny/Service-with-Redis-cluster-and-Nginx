@@ -4,5 +4,13 @@ services:
     build: ./app1
     ports:
       - "8001:8000"
+  worker2:
+    build: ./app2
+    ports:
+      - "8002:8000"
+  worker3:
+    build: ./app3
+    ports:
+      - "8003:8000"      
   redis:
     image: redis:alpine
