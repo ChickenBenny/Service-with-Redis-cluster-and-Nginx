@@ -12,8 +12,13 @@ services:
     build: ./app3
     ports:
       - "8003:8000"      
+  data:
+    build: ./data
+    ports:
+      - "8004:8000"   
   redis:
     image: redis:alpine
+    #volumes:
   nginx:
     build: ./nginx
     ports:
@@ -22,3 +27,4 @@ services:
       - worker1
       - worker2
       - worker3
+      - data
