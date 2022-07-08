@@ -14,3 +14,11 @@ services:
       - "8003:8000"      
   redis:
     image: redis:alpine
+  nginx:
+    build: ./nginx
+    ports:
+      - 8080:80
+    depends_on:
+      - worker1
+      - worker2
+      - worker3
