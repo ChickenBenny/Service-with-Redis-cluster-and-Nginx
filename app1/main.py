@@ -5,11 +5,11 @@ app = FastAPI()
 redis = Redis(host='redis', port=6379)
 
 @app.get("/")
-def home():
+async def home():
     return {"message": "This is worker 1."}
 
 @app.get("/convert/{target}")
-def convert(target):
+async def convert(target):
     merchant = redis.get(target)
     if merchant:
         return {"Merchant": merchant}
