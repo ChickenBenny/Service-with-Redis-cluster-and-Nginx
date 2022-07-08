@@ -1,0 +1,8 @@
+version: '3'
+services:
+  worker1:
+    build: ./app1
+    ports:
+      - "8001:8000"
+  redis:
+    image: redis:alpine
