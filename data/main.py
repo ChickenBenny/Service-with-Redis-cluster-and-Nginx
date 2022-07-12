@@ -1,6 +1,6 @@
 import pandas as pd
 from fastapi import FastAPI
-from redis import Redis
+# from redis import Redis
 from pydantic import BaseModel
 
 class Data(BaseModel):
@@ -8,7 +8,7 @@ class Data(BaseModel):
     value: str
 
 app = FastAPI()
-redis = Redis(host='redis', port=6379)
+# redis = Redis(host='redis', port=6379)
 
 @app.get("/")
 async def home():
@@ -26,8 +26,10 @@ async def input(id: str):
 
 @app.post("/get/")
 async def input(data: Data):
-    redis.set(str(data['key']), str(data['value']))
-    return {"message": f"Set KEY : {data['key']} and Value : {data['value']}."}
+    # redis.set(str(data['key']), str(data['value']))
+    print(data.key, ' ', data.value)
+    return {"message": "ok"}
+    # return {"message": f"Set KEY : {data['key']} and Value : {data['value']}."}
 
 @app.put("/put/{id}")
 async def update(id: str, data: Data):

@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Edu TAS Beginner', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+.header a {
+  font-size: larger;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.create-header {
+  padding-top: 1em;
+  padding-bottom: 0.6em;
+  font-size: x-large;
+  font-weight: bold;
+  font-family: 'Edu TAS Beginner', cursive;
+}
