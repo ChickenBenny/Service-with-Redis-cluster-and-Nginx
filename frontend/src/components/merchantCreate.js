@@ -9,17 +9,27 @@ export const MerchantsCreate = () => {
 
     const submit = event => {
 
-        fetch('http://localhost:8000/get/', {
-            method: 'POST', body: JSON.stringify({
-                'key': key,
-                'value': value
-            })
+        const headers = { 'Content-Type': 'application/json' }
+        const data = {
+            "key": key,
+            "value": value
+        }
+        fetch('http://localhost:8000/get', {
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
         });
+        // fetch('http://localhost:8000/get/', {
+        //     method: 'POST', headers: {'Content-Type': 'application/create/json'}, body: JSON.stringify({
+        //         'key': key,
+        //         'value': value
+        //     })
+        // });
 
-        console.log(JSON.stringify({
-            'key': key,
-            'value': value
-        }));
+        // console.log(JSON.stringify({
+        //     'key': key,
+        //     'value': value
+        // }));
 
         //  navigate(-1);
     }
