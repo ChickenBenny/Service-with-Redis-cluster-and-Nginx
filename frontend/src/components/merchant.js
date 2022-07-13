@@ -10,6 +10,8 @@ export const Merchants = () => {
 
                     <thead>
                         <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Merchant Code</th>
                             <th scope="col">Merchant Name</th>
                         </tr>
@@ -17,10 +19,12 @@ export const Merchants = () => {
                     <tbody>
 
                         <tr>
-                            <td>tmp_a</td>
-                            <td>tmp_b</td>
+                            <td>date</td>
+                            <td>type</td>
+                            <td>code</td>
+                            <td>name</td>
                             <td>
-                                <a href="#" className="btn btn-sm btn-outline-secondary">Delete</a>
+                                <a href="#" className="btn btn-sm btn-outline-dark">Delete</a>
                             </td>
                         </tr>
 

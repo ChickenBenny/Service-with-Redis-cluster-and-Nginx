@@ -1,37 +1,26 @@
 import { useState } from "react";
 import { Wrapper } from "./wrapper";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export const MerchantsCreate = () => {
-    const [key, setKey] = useState('code');
+export const Create = () => {
+    const [key, setKey] = useState('');
     const [value, setValue] = useState('');
     const navigate = useNavigate();
 
     const submit = event => {
 
-        const headers = { 'Content-Type': 'application/json' }
+        const headers = { 'Content-Type': 'application/json' };
         const data = {
-            "key": key,
-            "value": value
-        }
+            key: key,
+            value: value
+        };
         fetch('http://localhost:8000/get', {
             method: 'POST', 
-            headers: { 'Content-Type': 'application/json' },
+            headers: headers,
             body: JSON.stringify(data)
         });
-        // fetch('http://localhost:8000/get/', {
-        //     method: 'POST', headers: {'Content-Type': 'application/create/json'}, body: JSON.stringify({
-        //         'key': key,
-        //         'value': value
-        //     })
-        // });
 
-        // console.log(JSON.stringify({
-        //     'key': key,
-        //     'value': value
-        // }));
-
-        //  navigate(-1);
+        navigate(-1);
     }
 
     return (
@@ -39,7 +28,7 @@ export const MerchantsCreate = () => {
             <p className="create-header">Insert Merchant code and Merchant name to database</p>
             <form className="mt-3">
                 <div className="form-floating pb-3">
-                    <input className="form-control" placeholder={key}  onChange={event => setKey(event.target.value)}/>
+                    <input className="form-control" placeholder="Code"  onChange={event => setKey(event.target.value)}/>
                     <label>Merchant Code</label>
                 </div>
 

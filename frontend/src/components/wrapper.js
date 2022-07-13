@@ -22,28 +22,16 @@ export const Wrapper = props => {
                     </h6>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            {/* <a class="nav-link active" aria-current="page" href="#"> */}
-                            <span data-feather="home" class="align-text-bottom"></span>
-                            <Link to={`/create`} className="btn btn-sm btn-outline-secondary">Create</Link>
-                            {/* </a> */}
+                            <a className="btn btn-lg btn-outline-primary" aria-current="page" href="/create">Create</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                            <span data-feather="file" class="align-text-bottom"></span>
-                            Read
-                            </a>
+                            <a className="btn btn-lg btn-outline-primary" aria-current="page" href="/read"> Read </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                            Update
-                            </a>
+                            <a className="btn btn-lg btn-outline-primary" aria-current="page" href="/update">Update</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                            <span data-feather="users" class="align-text-bottom"></span>
-                            Delete
-                            </a>
+                            <a className="btn btn-lg btn-outline-primary" aria-current="page" href="/delete">Delete</a>
                         </li>
                     </ul>
 

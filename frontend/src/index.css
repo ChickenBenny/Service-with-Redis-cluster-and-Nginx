@@ -27,3 +27,21 @@ code {
   font-weight: bold;
   font-family: 'Edu TAS Beginner', cursive;
 }
+
+.nav-item {
+  padding: 0.8em;
+  padding-left: 2.5em;
+}
+
+.table-responsive {
+  padding-top: 2em;
+}
+
+.read-form {
+  padding: 1em;
+  display: flex;
+}
+
+.read-return button{
+  padding-left: 70%;
+}
