@@ -38,37 +38,50 @@ async def home():
 
 @app.get("/get/{id}")
 async def input(id: str):
-    if lib.get(id):
-        print(id)
-        return {"message": lib.get(id)}
+    data = redis.get(id)
+    if data:
+        return {"message": data}
     else:
-        print(id)
         return {"message": "None"}
-
-# @app.get("/cleanup")
-# async def cleanup():
-#     redis.flushall()
-#     return {"message": "Clean all the data."}
-
-
 
 
 @app.post("/get/")
 async def input(data: Data):
-    # redis.set(str(data['key']), str(data['value']))
-    print(f"Create \nKEY: {data.key}\nVALUE: {data.value}")
+    redis.set(data.key, data.value)
     return {"message": "Success"}
-    # return {"message": f"Set KEY : {data['key']} and Value : {data['value']}."}
 
-# @app.put("/put/{id}")
-# async def update(id: str, data: Data):
-#     redis.set(str(data['key']), str(data['value']))
-#     return {"message": f"Update KEY : {data['key']} and Value : {data['value']}."}    
 
-# @app.delete("/delete/{id}")
-# async def delete(id: str) :
-#     redis.delete(id)
-#     return {"message": f"Delete {id}."}
+@app.get("/test/{id}")
+def test(id: str):
+    print(lib.get(id))
+    return {"message": "OK"}
+
+
+@app.delete("/delete/{id}")
+async def delete(id: str):
+    if redis.get(id):
+        redis.delete(id)
+        return {"message": "Success"}
+    else:
+        return {"message": "None"}
+
+
+@app.put("/put/{id}")
+async def update(id: str, data: Data):
+    if redis.get(id):
+        redis.set(id, data.value)
+        return {"message": "Success"}
+    else:
+        return {"message": "None"}
+
+
+@app.get("/cleanup")
+async def cleanup():
+    redis.flushall()
+    return {"message": "Clean all the data."}
+
+
+
 
 # @app.get("/inputdata")
 # async def inputdata():

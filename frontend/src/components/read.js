@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Wrapper } from "./wrapper";
-import { useNavigate } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
 export const Read = () => {
@@ -14,15 +13,10 @@ export const Read = () => {
                         headers: headers,
                         method: 'GET'
                         });
+
         const content = await response.json();
-        if (content && content != "None") {
-            const info = <div>Merchant name : {content["message"]}.</div>;
-            ReactDOM.render(info, document.getElementById('show'));
-        }
-        else {
-            const info = <div>Merchant name : None.</div>
-            ReactDOM.render(info, document.getElementsByClassName('show'));
-        }    
+        const info = <div>Merchant name : {content["message"]}.</div>;
+        ReactDOM.render(info, document.getElementById('show'));
     }
     
 

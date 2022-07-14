@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Wrapper } from "./wrapper";
-import { useNavigate } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 
 export const Create = () => {
     const [key, setKey] = useState('');
     const [value, setValue] = useState('');
-    const navigate = useNavigate();
 
     const submit = async event => {
 
@@ -20,14 +19,9 @@ export const Create = () => {
                         body: JSON.stringify(data)
                         });
         const content = await response.json();
-        if(content["message"] == "Success"){
-            console.log("true");
-        }
-        else{
-            console.log('false');
-        }
+        const info = <div>Create {key} as {value}.</div>;
+        ReactDOM.render(info, document.getElementById('show'));
 
-        // navigate(-1);
     }
 
     return (
@@ -47,6 +41,7 @@ export const Create = () => {
                 <button className="w-100 btn btn-lg btn-primary" onClick={submit} type="button">Submit</button>
 
             </form>
+            <div id="show"></div>
         </Wrapper>
     )
 }

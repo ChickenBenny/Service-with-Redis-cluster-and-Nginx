@@ -1,5 +1,3 @@
-import {Link} from "react-router-dom";
-
 export const Wrapper = props => {
     return (
       <>
@@ -43,16 +41,10 @@ export const Wrapper = props => {
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                            <span data-feather="file-text" class="align-text-bottom"></span>
-                            Import
-                            </a>
+                            <a className="btn btn-lg btn-outline-primary" aria-current="page" href="/#">Import</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                            <span data-feather="file-text" class="align-text-bottom"></span>
-                            Cleanup
-                            </a>
+                            <a className="btn btn-lg btn-outline-primary" aria-current="page" href="/delete">Cleanup</a>
                         </li>
                     </ul>
                 </div>
@@ -66,3 +58,4 @@ export const Wrapper = props => {
       </>
     )
 }
+
