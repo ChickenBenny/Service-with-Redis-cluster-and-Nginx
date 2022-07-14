@@ -1,19 +1,30 @@
 import { useState } from "react";
 import { Wrapper } from "./wrapper";
 import { useNavigate } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 
 export const Read = () => {
     const [key, setKey] = useState('')
-    const navigate = useNavigate();
 
-    const submit = event => {
+    const submit = async event => {
         const headers = { 'Content-Type': 'application/json' };
+        console.log(key);
 
-        fetch(`http://localhost:8000/get/key`, {
-            headers: headers,
-            method: 'GET'
-        })
+        const response = await fetch(`http://localhost:8000/get/${key}`, {
+                        headers: headers,
+                        method: 'GET'
+                        });
+        const content = await response.json();
+        if (content && content != "None") {
+            const info = <div>Merchant name : {content["message"]}.</div>;
+            ReactDOM.render(info, document.getElementById('show'));
+        }
+        else {
+            const info = <div>Merchant name : None.</div>
+            ReactDOM.render(info, document.getElementsByClassName('show'));
+        }    
     }
+    
 
     return (
         <Wrapper>
@@ -22,13 +33,15 @@ export const Read = () => {
                 <div class="container-fluid">
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={event => setKey(event.target.value)} />
-                        <button class="btn btn-outline-success" type="submit" onClick={submit}>Search</button>
+                        <button class="btn btn-outline-success" type="button" onClick={ submit }>Search</button>
+
                     </form>
+
                 </div>
+
             </nav>
-            <div className="read-return">
-                <button type="submit" >Back</button>
-            </div>
+            <div id="show"></div>
+
         </Wrapper>
     )
 }

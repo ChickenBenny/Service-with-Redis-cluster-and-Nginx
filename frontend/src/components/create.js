@@ -7,20 +7,27 @@ export const Create = () => {
     const [value, setValue] = useState('');
     const navigate = useNavigate();
 
-    const submit = event => {
+    const submit = async event => {
 
         const headers = { 'Content-Type': 'application/json' };
         const data = {
             key: key,
             value: value
         };
-        fetch('http://localhost:8000/get', {
-            method: 'POST', 
-            headers: headers,
-            body: JSON.stringify(data)
-        });
+        const response = await fetch('http://localhost:8000/get', {
+                        method: 'POST', 
+                        headers: headers,
+                        body: JSON.stringify(data)
+                        });
+        const content = await response.json();
+        if(content["message"] == "Success"){
+            console.log("true");
+        }
+        else{
+            console.log('false');
+        }
 
-        navigate(-1);
+        // navigate(-1);
     }
 
     return (

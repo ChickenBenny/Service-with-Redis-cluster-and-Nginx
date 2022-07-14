@@ -1,4 +1,4 @@
-import { Merchants } from "./components/merchant";
+import { Dashboard } from "./components/dashboard";
 import { Create } from "./components/create"
 import { Read } from "./components/read"
 import { Update } from "./components/update"
@@ -10,7 +10,7 @@ function App() {
   return (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Merchants />}/>
+      <Route path="/" element={<Dashboard />}/>
       <Route path="/create" element={<Create />}/>
       <Route path="/read" element={<Read />}/>
       <Route path="/update" element={<Update />}/>

@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {Wrapper} from "./wrapper";
 
-export const Merchants = () => {
+export const Dashboard = () => {
+
 
     return (
         <Wrapper>

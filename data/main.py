@@ -1,5 +1,5 @@
 import fastapi
-import pandas as pd
+# import pandas as pd
 from fastapi import FastAPI
 # from redis import Redis
 from pydantic import BaseModel
@@ -24,43 +24,56 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+lib = {
+    "Benny": "Hsiao",
+    "Computer": "Science",
+    "Python": "Hello world"
+}
+
+
 @app.get("/")
 async def home():
-    print("Connect success!")
-    return {"message": "This is the worker which can manipulate the database."}
+    return {"message": "Connected successfully!"}
 
-@app.get("/cleanup")
-async def cleanup():
-    redis.flushall()
-    return {"message": "Clean all the data."}
 
 @app.get("/get/{id}")
 async def input(id: str):
-    data = redis.get(id)
-    return {"message": data}  
+    if lib.get(id):
+        print(id)
+        return {"message": lib.get(id)}
+    else:
+        print(id)
+        return {"message": "None"}
+
+# @app.get("/cleanup")
+# async def cleanup():
+#     redis.flushall()
+#     return {"message": "Clean all the data."}
+
+
 
 
 @app.post("/get/")
 async def input(data: Data):
     # redis.set(str(data['key']), str(data['value']))
     print(f"Create \nKEY: {data.key}\nVALUE: {data.value}")
-    return {"message": f"KEY: {data.key} VALUE: {data.value}"}
+    return {"message": "Success"}
     # return {"message": f"Set KEY : {data['key']} and Value : {data['value']}."}
 
-@app.put("/put/{id}")
-async def update(id: str, data: Data):
-    redis.set(str(data['key']), str(data['value']))
-    return {"message": f"Update KEY : {data['key']} and Value : {data['value']}."}    
+# @app.put("/put/{id}")
+# async def update(id: str, data: Data):
+#     redis.set(str(data['key']), str(data['value']))
+#     return {"message": f"Update KEY : {data['key']} and Value : {data['value']}."}    
 
-@app.delete("/delete/{id}")
-async def delete(id: str) :
-    redis.delete(id)
-    return {"message": f"Delete {id}."}
+# @app.delete("/delete/{id}")
+# async def delete(id: str) :
+#     redis.delete(id)
+#     return {"message": f"Delete {id}."}
 
-@app.get("/inputdata")
-async def inputdata():
-    need_to_load = pd.read_csv('./data/data.csv')
-    for i in range(10000):
-        print(i)
-        redis.set(str(need_to_load.iloc[i, 1]), str(need_to_load.iloc[i, 2]))
-    return {"message": "Success."}
+# @app.get("/inputdata")
+# async def inputdata():
+#     need_to_load = pd.read_csv('./data/data.csv')
+#     for i in range(10000):
+#         print(i)
+#         redis.set(str(need_to_load.iloc[i, 1]), str(need_to_load.iloc[i, 2]))
+#     return {"message": "Success."}

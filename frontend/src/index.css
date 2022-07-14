@@ -42,6 +42,9 @@ code {
   display: flex;
 }
 
-.read-return button{
-  padding-left: 70%;
+#show {
+  padding-left: 1em;
+  padding-top: 1em;
+  font-size: larger;
+  font-weight: 700;
 }
