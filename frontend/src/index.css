@@ -48,3 +48,10 @@ code {
   font-size: larger;
   font-weight: 700;
 }
+
+#upload-response {
+  padding-left: 1em;
+  padding-top: 1em;
+  font-size: larger;
+  font-weight: 700;
+}

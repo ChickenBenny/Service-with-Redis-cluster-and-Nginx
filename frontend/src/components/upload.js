@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import ReactDOM from 'react-dom';
+
 
 export const Upload = props => {
     const [show, setShow] = useState(false);
@@ -10,14 +12,22 @@ export const Upload = props => {
 
     const [file, setFile] = useState(null);
     const update = () => {
-        const headers = { 'Content-Type': 'application/json' };
-        fetch('http://localhost:8000/uploadfile', {
-            method: 'POST',
-            // headers: headers,
-            body: file
-        });
-        console.log(file);
-        // setShow(false);
+        var formdata = new FormData();
+        formdata.append("file", file, file.name);
+        
+        var requestOptions = {
+          method: 'POST',
+          body: formdata,
+          redirect: 'follow'
+        };
+        
+        fetch("http://localhost:8000/uploadfile", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+
+        const info = <div>Upload Success.</div>
+        ReactDOM.render(info, document.getElementById('upload-response'));
     }
 
     return (
@@ -35,6 +45,7 @@ export const Upload = props => {
                     <div className="file-uploader">
                         <input type="file" onChange={event => setFile(event.target.files[0])} />
                     </div>
+                    <div id="upload-response"></div>
                 </Modal.Body>
                 
                 <Modal.Footer>

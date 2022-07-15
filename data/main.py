@@ -1,6 +1,6 @@
 import fastapi
-# import pandas as pd
-from fastapi import FastAPI
+import pandas as pd
+from fastapi import FastAPI, File, UploadFile
 # from redis import Redis
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 class Data(BaseModel):
     key: str
     value: str
+
 
 app = FastAPI()
 # redis = Redis(host='redis', port=6379)
@@ -78,10 +79,24 @@ async def update(id: str, data: Data):
 @app.get("/cleanup")
 async def cleanup():
     redis.flushall()
-    return {"message": "Clean all the data."}
+    return {"message": "Flush success."}
 
 
+@app.post("/file/")
+async def create_upload_file(file: UploadFile = File(...)):
+    return {"filename": file.filename}
 
+
+@app.post("/uploadfile")
+async def upload_file(file: UploadFile = File(...)):
+    print(file.filename)
+    data = pd.read_csv(file.file)
+    print(data)
+    for i in range(data.shape[0]):
+        print(f"data_{i}_ok: {data.iloc[i, 2]}")
+        # redis.set(str(data.iloc[i, 0]), str(data.iloc[i, 1]))
+    return {"message": "Init the database with the file complete."}
+    
 
 # @app.get("/inputdata")
 # async def inputdata():
