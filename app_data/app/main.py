@@ -1,7 +1,7 @@
 import fastapi
 import pandas as pd
 from fastapi import FastAPI, File, UploadFile
-# from redis import Redis
+from redis import Redis
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -11,7 +11,7 @@ class Data(BaseModel):
 
 
 app = FastAPI()
-# redis = Redis(host='redis', port=6379)
+redis = Redis(host='redis', port=6379)
 
 origins = [
     "http://localhost:3000",
@@ -94,14 +94,15 @@ async def upload_file(file: UploadFile = File(...)):
     print(data)
     for i in range(data.shape[0]):
         print(f"data_{i}_ok: {data.iloc[i, 2]}")
-        # redis.set(str(data.iloc[i, 0]), str(data.iloc[i, 1]))
+        redis.set(str(data.iloc[i, 0]), str(data.iloc[i, 1]))
     return {"message": "Init the database with the file complete."}
-    
 
-# @app.get("/inputdata")
-# async def inputdata():
-#     need_to_load = pd.read_csv('./data/data.csv')
-#     for i in range(10000):
-#         print(i)
-#         redis.set(str(need_to_load.iloc[i, 1]), str(need_to_load.iloc[i, 2]))
-#     return {"message": "Success."}
+
+@app.get("/test")
+async def test():
+    data = pd.read_csv('/data/data.csv')
+    print(data)
+    for i in range(data.shape[0]):
+        print(f"data_{i}_ok: {data.iloc[i, 2]}")
+        redis.set(str(data.iloc[i, 1]), str(data.iloc[i, 2]))
+    return {"message": "Init the database with the file complete."}

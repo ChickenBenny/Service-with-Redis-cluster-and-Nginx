@@ -13,9 +13,9 @@ services:
     ports:
       - "8003:8000"      
   data:
-    build: ./data
+    build: ./app_data/app
     volumes:
-      - ./data/data.csv:/data/data.csv
+      - ./app_data/app/test.csv:/data/data.csv
     ports:
       - "8004:8000"   
   redis:
