@@ -69,11 +69,8 @@ async def delete(id: str):
 
 @app.put("/put/{id}")
 async def update(id: str, data: Data):
-    if redis.get(id):
-        redis.set(id, data.value)
-        return {"message": "Success"}
-    else:
-        return {"message": "None"}
+    redis.hset(data.key, data.value)
+    return {"message": "Success"}
 
 
 @app.get("/cleanup")
@@ -91,10 +88,9 @@ async def create_upload_file(file: UploadFile = File(...)):
 async def upload_file(file: UploadFile = File(...)):
     print(file.filename)
     data = pd.read_csv(file.file)
-    print(data)
     for i in range(data.shape[0]):
         print(f"data_{i}_ok: {data.iloc[i, 2]}")
-        redis.set(str(data.iloc[i, 0]), str(data.iloc[i, 1]))
+        redis.set(str(data.iloc[i, 1]), str(data.iloc[i, 2]))
     return {"message": "Init the database with the file complete."}
 
 

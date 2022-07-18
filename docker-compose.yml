@@ -18,6 +18,10 @@ services:
       - ./app_data/app/test.csv:/data/data.csv
     ports:
       - "8004:8000"   
+  react:
+    build: ./app_data/frontend
+    ports:
+      - "3000:3000"
   redis:
     image: redis:alpine
   nginx:

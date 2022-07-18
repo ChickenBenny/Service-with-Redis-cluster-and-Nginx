@@ -21,13 +21,14 @@ export const Upload = props => {
           redirect: 'follow'
         };
         
-        fetch("http://localhost:8000/uploadfile", requestOptions)
+        fetch("http://localhost:8004/uploadfile", requestOptions)
           .then(response => response.text())
           .then(result => console.log(result))
           .catch(error => console.log('error', error));
 
         const info = <div>Upload Success.</div>
         ReactDOM.render(info, document.getElementById('upload-response'));
+        setShow(false);
     }
 
     return (

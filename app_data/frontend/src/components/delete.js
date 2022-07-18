@@ -11,7 +11,7 @@ export const Delete = () => {
         const headers = { 'Content-Type': 'application/json' };
         console.log(key);
 
-        const response = await fetch(`http://localhost:8000/delete/${key}`, {
+        const response = await fetch(`http://localhost:8004/delete/${key}`, {
             headers: headers,
             method: 'DELETE'
             });

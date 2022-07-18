@@ -13,7 +13,7 @@ export const Update = () => {
             key: key,
             value: value
         };
-        const response = await fetch(`http://localhost:8000/${key}`, {
+        const response = await fetch(`http://localhost:8004/${key}`, {
                         method: 'PUT', 
                         headers: headers,
                         body: JSON.stringify(data)

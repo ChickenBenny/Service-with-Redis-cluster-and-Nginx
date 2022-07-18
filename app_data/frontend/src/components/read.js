@@ -9,7 +9,7 @@ export const Read = () => {
         const headers = { 'Content-Type': 'application/json' };
         console.log(key);
 
-        const response = await fetch(`http://localhost:8000/get/${key}`, {
+        const response = await fetch(`http://localhost:8004/get/${key}`, {
                         headers: headers,
                         method: 'GET'
                         });

@@ -13,7 +13,7 @@ export const Create = () => {
             key: key,
             value: value
         };
-        const response = await fetch('http://localhost:8000/get', {
+        const response = await fetch('http://localhost:8004/get', {
                         method: 'POST', 
                         headers: headers,
                         body: JSON.stringify(data)

@@ -10,7 +10,7 @@ export const Cleanup = props => {
     const handleShow = () => setShow(true);
     const flush = () =>{
         const headers = { 'Content-Type': 'application/json' };
-        fetch('http://localhost:8000/cleanup', {
+        fetch('http://localhost:8004/cleanup', {
                 method: 'GET', 
                 headers: headers,
                 });
