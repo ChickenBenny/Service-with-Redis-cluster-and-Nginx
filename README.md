@@ -22,7 +22,7 @@ $ docker-compose up
 ├─app2
 └─app3
 ```
-![](https://i.imgur.com/aUeF1Sk.png)
+![](https://i.imgur.com/mWQ1r99.png)
 
 
 ### Problem try to solve
