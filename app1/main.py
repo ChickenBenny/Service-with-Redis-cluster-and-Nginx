@@ -3,7 +3,6 @@ from redis import Redis
 from rediscluster import RedisCluster
 
 app = FastAPI()
-# redis = Redis(host='redis', port=6379)
 rc = RedisCluster(startup_nodes=[{"host": "redis-1", "port": "7001"}], decode_responses=True)
 
 @app.get("/")
