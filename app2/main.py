@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 from redis import Redis
+from rediscluster import RedisCluster
+
 
 app = FastAPI()
-redis = Redis(host='redis', port=6379)
+rc = RedisCluster(startup_nodes=[{"host": "redis-1", "port": "7001"}], decode_responses=True)
+
 
 @app.get("/")
 async def home():
@@ -10,7 +13,7 @@ async def home():
 
 @app.get("/convert/{target}")
 async def convert(target):
-    merchant = redis.get(target)
+    merchant = rc.get(target)
     if merchant:
         return {"Merchant": merchant}
     else:
