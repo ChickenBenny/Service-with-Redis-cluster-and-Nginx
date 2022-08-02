@@ -1,0 +1,67 @@
+version: '3'
+services:
+  redis-1:
+    container_name: "redis-1"
+    image: redis:6.0-alpine
+    ports:
+      - 7001:7001
+      - 17001:17001
+    volumes:
+      - "./7001/conf/redis.conf:/etc/redis.conf"
+    command: redis-server /etc/redis.conf
+    depends_on:
+      - redis-2
+      - redis-3
+      - redis-4
+      - redis-5
+      - redis-6
+
+  redis-2:
+    container_name: "redis-2"
+    image: redis:6.0-alpine
+    ports:
+      - 7002:7002
+      - 17002:17002
+    volumes:
+      - "./7002/conf/redis.conf:/etc/redis.conf"
+    command: redis-server /etc/redis.conf
+
+  redis-3:
+    container_name: "redis-3"
+    image: redis:6.0-alpine
+    ports:
+      - 7003:7003
+      - 17003:17003
+    volumes:
+      - "./7003/conf/redis.conf:/etc/redis.conf"
+    command: redis-server /etc/redis.conf
+
+  redis-4:
+    container_name: "redis-4"
+    image: redis:6.0-alpine
+    ports:
+      - 7004:7004
+      - 17004:17004
+    volumes:
+      - "./7004/conf/redis.conf:/etc/redis.conf"
+    command: redis-server /etc/redis.conf
+
+  redis-5:
+    container_name: "redis-5"
+    image: redis:6.0-alpine
+    ports:
+      - 7005:7005
+      - 17005:17005
+    volumes:
+      - "./7005/conf/redis.conf:/etc/redis.conf"
+    command: redis-server /etc/redis.conf
+
+  redis-6:
+    container_name: "redis-6"
+    image: redis:6.0-alpine
+    ports:
+      - 7006:7006
+      - 17006:17006
+    volumes:
+      - "./7006/conf/redis.conf:/etc/redis.conf"
+    command: redis-server /etc/redis.conf
