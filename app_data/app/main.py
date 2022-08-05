@@ -2,6 +2,7 @@ import fastapi
 import pandas as pd
 from fastapi import FastAPI, File, UploadFile
 from redis import Redis
+from rediscluster import RedisCluster
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -11,7 +12,12 @@ class Data(BaseModel):
 
 
 app = FastAPI()
-redis = Redis(host='redis', port=6379)
+rc = RedisCluster(startup_nodes=[{"host": "redis-1", "port": "7001"},
+                                 {"host": "redis-2", "port": "7002"},
+                                 {"host": "redis-3", "port": "7003"},
+                                 {"host": "redis-4", "port": "7004"},
+                                 {"host": "redis-5", "port": "7005"},
+                                 {"host": "redis-6", "port": "7006"}], decode_responses=True)
 
 origins = [
     "http://localhost:3000",
@@ -39,7 +45,7 @@ async def home():
 
 @app.get("/get/{id}")
 async def input(id: str):
-    data = redis.get(id)
+    data = rc.get(id)
     if data:
         return {"message": data}
     else:
@@ -48,7 +54,7 @@ async def input(id: str):
 
 @app.post("/get/")
 async def input(data: Data):
-    redis.set(data.key, data.value)
+    rc.set(data.key, data.value)
     return {"message": "Success"}
 
 
@@ -60,8 +66,8 @@ def test(id: str):
 
 @app.delete("/delete/{id}")
 async def delete(id: str):
-    if redis.get(id):
-        redis.delete(id)
+    if rc.get(id):
+        rc.delete(id)
         return {"message": "Success"}
     else:
         return {"message": "None"}
@@ -69,13 +75,13 @@ async def delete(id: str):
 
 @app.put("/put/{id}")
 async def update(id: str, data: Data):
-    redis.hset(data.key, data.value)
+    rc.hset(data.key, data.value)
     return {"message": "Success"}
 
 
 @app.get("/cleanup")
 async def cleanup():
-    redis.flushall()
+    rc.flushall()
     return {"message": "Flush success."}
 
 
@@ -90,7 +96,7 @@ async def upload_file(file: UploadFile = File(...)):
     data = pd.read_csv(file.file)
     for i in range(data.shape[0]):
         print(f"data_{i}_ok: {data.iloc[i, 2]}")
-        redis.set(str(data.iloc[i, 1]), str(data.iloc[i, 2]))
+        rc.set(str(data.iloc[i, 1]), str(data.iloc[i, 2]))
     return {"message": "Init the database with the file complete."}
 
 
@@ -100,5 +106,5 @@ async def test():
     print(data)
     for i in range(data.shape[0]):
         print(f"data_{i}_ok: {data.iloc[i, 2]}")
-        redis.set(str(data.iloc[i, 1]), str(data.iloc[i, 2]))
+        rc.set(str(data.iloc[i, 1]), str(data.iloc[i, 2]))
     return {"message": "Init the database with the file complete."}
