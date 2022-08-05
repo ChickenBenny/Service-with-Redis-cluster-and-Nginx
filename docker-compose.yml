@@ -50,10 +50,10 @@ services:
       - redis-5
       - redis-6  
 
-  # react:
-  #   build: ./app_data/frontend
-  #   ports:
-  #     - "3000:3000"
+  react:
+    build: ./app_data/frontend
+    ports:
+      - "3000:3000"
   
   redis-1:
     container_name: "redis-1"
@@ -64,7 +64,15 @@ services:
     volumes:
       - "./redis/7001/conf/redis.conf:/etc/redis.conf"
       - "./redis/7001/redis-cluster.sh:/data/redis-cluster.sh"
-    command: redis-server /etc/redis.conf 
+    command:
+      - sh
+      - -c
+      - redis-server /etc/redis.conf --daemonize yes &
+        echo "yes" | 
+        redis-cli -h 172.20.10.11 -p 7001 
+        --cluster create 172.20.10.11:7001 172.20.10.11:7002 172.20.10.11:7003 172.20.10.11:7004 172.20.10.11:7005 172.20.10.11:7006 
+        --cluster-replicas 1 & tail -f
+
     depends_on:
       - redis-2
       - redis-3

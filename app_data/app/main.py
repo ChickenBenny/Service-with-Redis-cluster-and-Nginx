@@ -12,7 +12,12 @@ class Data(BaseModel):
 
 
 app = FastAPI()
-rc = RedisCluster(startup_nodes=[{"host": "redis-1", "port": "7001"}], decode_responses=True)
+rc = RedisCluster(startup_nodes=[{"host": "redis-1", "port": "7001"},
+                                 {"host": "redis-2", "port": "7002"},
+                                 {"host": "redis-3", "port": "7003"},
+                                 {"host": "redis-4", "port": "7004"},
+                                 {"host": "redis-5", "port": "7005"},
+                                 {"host": "redis-6", "port": "7006"}], decode_responses=True)
 
 origins = [
     "http://localhost:3000",
