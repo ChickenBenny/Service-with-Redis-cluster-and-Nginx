@@ -1,33 +1,41 @@
 ###### tags: `Microservice`
-# MicroService 
+# Service with Redis cluster  
 ### Quick start
 1. Create a directory for this project
 ```
-$ mkdir microservice
-$ cd microservice
-$ git clone git@github.com:ChickenBenny/Social-network-web-app.git
+$ mkdir service
+$ cd service
+$ git clone git@github.com:ChickenBenny/Service-with-Redis-cluster-and-Nginx.git
 ```
-2. Run the serviceby docker-compose up
+2. Change the ip of redis cluster
 ```
+// Find your server ip first and change the tmpl in redis folder
+$ cd reids
+$ vi redis-cluster.tmpl   // cluster-announce-ip ${your ip}
+
+// After change the ip run the script, this will help you crate all the redis config
+$ bash needToRun.sh
+```
+3. Change the cluster ip in docker-compose
+```
+// Cluster will create when redis-1 container build
+// Change all the ip in redis-1 command to your ip
+/*  redis-cli -h {ip} -p 7001 
+    --cluster create {ip}:7001 {ip}:7002 {ip}:7003 {ip}:7004 {ip}:7005 {ip}:7006 
+    --cluster-replicas 1 & tail -f    */    
+```
+4. Run the compose yml
+```
+// This yml will create 3 workers with a nginx load balance and a redis-cluster with 3 master slave db
 $ docker-compose up
 ```
-3. Architecture of this project
-```
-.
-├─nginx
-├─app_data
-│   ├─app
-│   └─frontend 
-├─app1
-├─app2
-└─app3
-```
-![](https://i.imgur.com/mWQ1r99.png)
+
+5. Service workflow
+
+ ![](https://i.imgur.com/WHOLyjb.png)
 
 
-### Problem try to solve
-1. Try to build a microservice can transfer the code to the name of merchant.
-2. The service time should be complete in 1-3 sec.
+
 
 ### Technology
 <p align="left">
@@ -46,9 +54,24 @@ $ docker-compose up
 * Redis (NoSQL database)
 * Docker (Container)
 
-### Try to learn 
-* Learn the concept of load balancer and try to create a load balancer
-* Learn to use the React framework
-* Learn to connect frontend page to backned server
-* Learn NoSQL database and reddis
+### Learn more
+#### Nginx
+We used Nginx as load balancer. Take a look as following resource.
+* What is load balancer : https://medium.com/tech-it-out/proxy-vs-reverse-proxy-vs-load-balancer-3937915631c8
+* LB with docker : https://towardsdatascience.com/sample-load-balancing-solution-with-docker-and-nginx-cf1ffc60e644
+
+#### Fastapi
+We used fastapi as backend framework. We create thee workers and a data management app. Take a look as following resource.
+* FastAPI doc : https://fastapi.tiangolo.com/
+* Youtube tutorial(19 hr) : https://www.youtube.com/watch?v=0sOvCWFmrtA&list=LL&index=37&t=1132s
+
+#### Redis
+We used redis as our database, because we are solving key-value mapping issue and we want the reponse really quickly. Take a look as following resource.
+* Redis introduction : https://blog.devops.dev/redis-introduction-from-zero-to-hero-part-i-7c13e63170f5
+* Redis persistence :　https://blog.devops.dev/redis-persistence-and-cap-theorem-from-zero-to-hero-part-ii-91eaedf58d79
+* Redis cluster : https://blog.devops.dev/redis-cluster-and-sentinel-with-docker-from-zero-to-hero-part-iv-63ba9d196cc3
+
+#### React
+We used React as our db management frontend page. Take a look as following resource.
+*　Tutorial : https://www.w3schools.com/REACT/DEFAULT.ASP
 
