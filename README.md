@@ -8,25 +8,26 @@ $ cd service
 $ git clone git@github.com:ChickenBenny/Service-with-Redis-cluster-and-Nginx.git
 ```
 2. Change the ip of redis cluster
+> Find your server ip first and change the ip  in tmpl file.
+
+> After change the ip, you should run the script(```needToRun.sh```), which will help you create all the redis config.
 ```
-// Find your server ip first and change the tmpl in redis folder
 $ cd reids
 $ vi redis-cluster.tmpl   // cluster-announce-ip ${your ip}
-
-// After change the ip run the script, this will help you crate all the redis config
-$ bash needToRun.sh
 ```
 3. Change the cluster ip in docker-compose
+> Cluster will create when redis-1 container build.
+
+> Change all the ip in redis-1 command to your ip.
+
 ```
-// Cluster will create when redis-1 container build
-// Change all the ip in redis-1 command to your ip
-/*  redis-cli -h {ip} -p 7001 
+redis-cli -h {ip} -p 7001 
     --cluster create {ip}:7001 {ip}:7002 {ip}:7003 {ip}:7004 {ip}:7005 {ip}:7006 
-    --cluster-replicas 1 & tail -f    */    
+    --cluster-replicas 1 & tail -f 
 ```
 4. Run the compose yml
+> This yml will create 3 workers with a nginx load balance and a redis-cluster with 3 master slave db
 ```
-// This yml will create 3 workers with a nginx load balance and a redis-cluster with 3 master slave db
 $ docker-compose up
 ```
 
