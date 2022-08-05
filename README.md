@@ -73,5 +73,5 @@ We used redis as our database, because we are solving key-value mapping issue an
 
 #### React
 We used React as our db management frontend page. Take a look as following resource.
-*　Tutorial : https://www.w3schools.com/REACT/DEFAULT.ASP
+* Tutorial : https://www.w3schools.com/REACT/DEFAULT.ASP
 
