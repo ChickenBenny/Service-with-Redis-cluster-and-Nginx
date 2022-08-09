@@ -58,12 +58,6 @@ async def input(data: Data):
     return {"message": "Success"}
 
 
-@app.get("/test/{id}")
-def test(id: str):
-    print(lib.get(id))
-    return {"message": "OK"}
-
-
 @app.delete("/delete/{id}")
 async def delete(id: str):
     if rc.get(id):
@@ -75,7 +69,7 @@ async def delete(id: str):
 
 @app.put("/put/{id}")
 async def update(id: str, data: Data):
-    rc.hset(data.key, data.value)
+    rc.set(data.key, data.value)
     return {"message": "Success"}
 
 
@@ -83,11 +77,6 @@ async def update(id: str, data: Data):
 async def cleanup():
     rc.flushall()
     return {"message": "Flush success."}
-
-
-@app.post("/file/")
-async def create_upload_file(file: UploadFile = File(...)):
-    return {"filename": file.filename}
 
 
 @app.post("/uploadfile")
