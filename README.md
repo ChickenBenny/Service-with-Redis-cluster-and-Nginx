@@ -26,7 +26,7 @@ $ export IP=${your ip}
 $ docker-compose up
 ```
 
-5. Service workflow
+4. Service workflow
 
  ![](https://i.imgur.com/WHOLyjb.png)
 
