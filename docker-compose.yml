@@ -69,8 +69,8 @@ services:
       - -c
       - redis-server /etc/redis.conf --daemonize yes &
         echo "yes" | 
-        redis-cli -h 172.20.10.11 -p 7001 
-        --cluster create 172.20.10.11:7001 172.20.10.11:7002 172.20.10.11:7003 172.20.10.11:7004 172.20.10.11:7005 172.20.10.11:7006 
+        redis-cli -h ${IP} -p 7001 
+        --cluster create ${IP}:7001 ${IP}:7002 ${IP}:7003 ${IP}:7004 ${IP}:7005 ${IP}:7006 
         --cluster-replicas 1 & tail -f
 
     depends_on:
