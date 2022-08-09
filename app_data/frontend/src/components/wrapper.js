@@ -7,7 +7,7 @@ export const Wrapper = props => {
       <>
         <div class="header">
             <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-                <a class="navbar-brand col-md-3 col-lg-2 me-0 px-5 fs-6" href="/">Bank SinoPac Merchant name converter</a>
+                <a class="navbar-brand col-md-3 col-lg-2 me-0 px-5 fs-6" href="/">Merchant name converter</a>
             </header>
         </div>
   
