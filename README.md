@@ -5,7 +5,7 @@
 ```
 $ mkdir service
 $ cd service
-$ git clone git@github.com:ChickenBenny/Service-with-Redis-cluster-and-Nginx.git
+$ git clone https://github.com/ChickenBenny/Service-with-Redis-cluster-and-Nginx.git
 ```
 2. Change the ip of redis cluster
 > Find your server ip first and change the ip  in tmpl file.
