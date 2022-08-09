@@ -21,8 +21,3 @@ async def convert(target):
         return {"Merchant": merchant}
     else:
         return {"Merchant": "None"}
-
-# @app.get("/test")
-# async def test():
-#     res = rc.get("ping")
-#     return {"res": res}
