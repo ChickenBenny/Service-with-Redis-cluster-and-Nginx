@@ -1,4 +1,4 @@
-import fastapi
+from fastapi import FastAPI
 import pandas as pd
 from fastapi import FastAPI, File, UploadFile
 from redis import Redis

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from redis import Redis
 from rediscluster import RedisCluster
+from pydantic import BaseModel
 
 
 app = FastAPI()
@@ -11,13 +12,24 @@ rc = RedisCluster(startup_nodes=[{"host": "redis-1", "port": "7001"},
                                  {"host": "redis-5", "port": "7005"},
                                  {"host": "redis-6", "port": "7006"}], decode_responses=True)
 
+class Data(BaseModel):
+    key: str
+
 @app.get("/")
 async def home():
-    return {"message": "This is worker 3."}
+    return {"message": "Connect successfully."}
 
 @app.get("/convert/{target}")
 async def convert(target):
     merchant = rc.get(target)
+    if merchant:
+        return {"Merchant": merchant}
+    else:
+        return {"Merchant": "None"}
+
+@app.post("/convert")
+async def convert(data: Data):
+    merchant = rc.get(data.key)
     if merchant:
         return {"Merchant": merchant}
     else:
