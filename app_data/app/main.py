@@ -20,7 +20,8 @@ rc = RedisCluster(startup_nodes=[{"host": "redis-1", "port": "7001"},
                                  {"host": "redis-6", "port": "7006"}], decode_responses=True)
 
 origins = [
-    "http://localhost:3000",
+    "http://localhost",
+    "https://localhost",
 ]
 
 app.add_middleware(
